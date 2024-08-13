@@ -1,0 +1,31 @@
+.button {
+  font-family: 'Commissioner', sans-serif;
+  font-size: 14px;
+  line-height: 1.25rem;
+  padding: 0.5rem;
+  outline: none;
+  border-radius: 0.375rem;
+  border: 1px solid rgb(207, 207, 211);
+  background-color: white;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgb(0, 66, 235);
+  color: white;
+  transition: all 0.2s;
+}
+
+.button:disabled {
+  pointer-events: none;
+  background-color: rgb(240, 240, 240);
+  color: rgb(150, 150, 150);
+  border-color: rgb(207, 207, 211);
+}
+
+.buttonLoading {
+  pointer-events: none;
+  background-color: rgb(240, 240, 240);
+  color: rgb(150, 150, 150);
+  border-color: rgb(207, 207, 211);
+}

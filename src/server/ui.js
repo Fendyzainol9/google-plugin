@@ -1,24 +1,28 @@
-export const onOpen = () => {
+export function onOpen() {
   const menu = DocumentApp.getUi()
     .createAddonMenu()
     .addItem('Start', 'openSidebar')
     .addSeparator()
-    .addItem('Insert Diagram', 'openCreateDiagramDialog')
-    .addItem('Edit Diagram', 'openEditDiagramDialog');
+    .addItem('New diagram', 'openCreateDiagramDialog')
+    .addItem('Browse diagrams', 'openSelectDiagramDialog')
+    .addItem('Edit selected diagram', 'openEditDiagramDialog')
+    .addSeparator()
+    .addItem('About', 'openAboutDialog')
+    .addItem('Help', 'openHelpDialog');
 
   menu.addToUi();
-};
+}
 
-export const setBaseUrl = (url) => {
+export function setBaseUrl(url) {
   try {
     const scriptProperties = PropertiesService.getScriptProperties();
     scriptProperties.setProperty('baseURL', url);
   } catch (err) {
     Logger.log('Failed with error %s', err.message);
   }
-};
+}
 
-const getBaseUrl = () => {
+function getBaseUrl() {
   try {
     const scriptProperties = PropertiesService.getScriptProperties();
     const baseURL = scriptProperties.getProperty('baseURL');
@@ -27,9 +31,9 @@ const getBaseUrl = () => {
   } catch (error) {
     Logger.log('Failed with error %s', error.message);
   }
-};
+}
 
-export const openCreateDiagramDialog = () => {
+export function openCreateDiagramDialog() {
   const html = HtmlService.createHtmlOutputFromFile('create-diagram-dialog')
     .append(
       `<script>
@@ -42,10 +46,10 @@ export const openCreateDiagramDialog = () => {
     )
     .setWidth(1366)
     .setHeight(768);
-  DocumentApp.getUi().showModalDialog(html, 'Medmaid Chart');
-};
+  DocumentApp.getUi().showModalDialog(html, 'Create new diagram');
+}
 
-export const openEditDiagramDialog = () => {
+export function openEditDiagramDialog() {
   const doc = DocumentApp.getActiveDocument();
   const selection = doc.getSelection();
 
@@ -68,9 +72,9 @@ export const openEditDiagramDialog = () => {
     .setHeight(768);
 
   DocumentApp.getUi().showModalDialog(html, 'Edit Diagram');
-};
+}
 
-export const openPreviewDiagramDialog = () => {
+export function openPreviewDiagramDialog() {
   const html = HtmlService.createHtmlOutputFromFile('preview-diagram-dialog')
     .append(
       `<script>
@@ -85,9 +89,9 @@ export const openPreviewDiagramDialog = () => {
     .setHeight(768);
 
   DocumentApp.getUi().showModalDialog(html, 'Preview Diagram');
-};
+}
 
-export const openEditDiagramDialogWithUrl = () => {
+export function openEditDiagramDialogWithUrl() {
   const html = HtmlService.createHtmlOutputFromFile('edit-diagram-dialog')
     .append(
       `<script>
@@ -102,9 +106,9 @@ export const openEditDiagramDialogWithUrl = () => {
     .setHeight(768);
 
   DocumentApp.getUi().showModalDialog(html, 'Edit Diagram');
-};
+}
 
-export const openSelectDiagramDialog = () => {
+export function openSelectDiagramDialog() {
   const html = HtmlService.createHtmlOutputFromFile('select-diagram-dialog')
     .append(
       `<script>
@@ -118,13 +122,34 @@ export const openSelectDiagramDialog = () => {
     .setWidth(1366)
     .setHeight(768);
   DocumentApp.getUi().showModalDialog(html, 'Select Diagram');
-};
+}
 
-export const openSidebar = () => {
+export function openAboutDialog() {
+  var ui = DocumentApp.getUi();
+
+  var text =
+    'PlantUML Gizmo was written for use in the OO Analysis and Design courses at École de technologie supérieure, and has been used by Google Engineers on Android and Google Pay.\n\n' +
+    'It uses JavaScript API Client Code described at http://plantuml.sourceforge.net/codejavascript.html as well as inflating routines at http://www.planttext.com/javascript/jquery-plantuml/plantuml.js\n\n' +
+    'Find me on twitter @thefuhrmanator. Version 15 (2019-11-22)';
+
+  ui.alert('About', text, ui.ButtonSet.OK);
+}
+
+export function openHelpDialog() {
+  var ui = DocumentApp.getUi();
+
+  var text = `
+  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+  `;
+
+  ui.alert('Help', text, ui.ButtonSet.OK);
+}
+
+export function openSidebar() {
   const html =
     HtmlService.createHtmlOutputFromFile('sidebar').setTitle('Mermaid Chart');
   DocumentApp.getUi().showSidebar(html);
-};
+}
 
 export function handleCallback(callbackRequest) {
   var service = getOAuthService();
@@ -413,7 +438,6 @@ export function syncImages(maxWidth = 400) {
             insertedImage.setAltDescription(altDescription);
           } else {
             Logger.log(`Failed to fetch image: ${response.getContentText()}`);
-            Logger.log(newImageUrl);
           }
         } catch (error) {
           Logger.log(`Error fetching image: ${error.message}`);
@@ -423,7 +447,7 @@ export function syncImages(maxWidth = 400) {
   });
 }
 
-export const getChartImages = () => {
+export function getChartImages() {
   const body = DocumentApp.getActiveDocument().getBody();
   const images = body.getImages();
   const imageBase64Strings = [];
@@ -446,9 +470,9 @@ export const getChartImages = () => {
   }
 
   return imageBase64Strings;
-};
+}
 
-export const selectChartImage = (altDescription) => {
+export function selectChartImage(altDescription) {
   if (!altDescription) {
     Logger.log('No altDescription provided.');
     return;
@@ -471,4 +495,4 @@ export const selectChartImage = (altDescription) => {
 
   // Set the selection to the range that includes the second image
   DocumentApp.getActiveDocument().setSelection(range);
-};
+}

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Button,
   CircularProgress,
   Container,
   Typography,
+  Button as MuiButton,
   Divider,
   Box,
   Tabs,
@@ -13,6 +13,7 @@ import { serverFunctions } from '../../utils/serverFunctions';
 import LoadingOverlay from '../../components/loading-overlay';
 import { buildUrl } from '../../utils/helpers';
 import useAuth from '../../hooks/useAuth';
+import Button from '../../components/button';
 
 interface ChartImage {
   altDescription: string;
@@ -238,27 +239,9 @@ const Sidebar = () => {
         />
         <>
           {authState?.authorized ? (
-            <Button
-              onClick={signOut}
-              color="primary"
-              variant="outlined"
-              sx={{
-                textTransform: 'initial',
-              }}
-            >
-              Logout
-            </Button>
+            <Button onClick={signOut}>Logout</Button>
           ) : (
-            <Button
-              onClick={handleLoginClick}
-              color="primary"
-              variant="outlined"
-              sx={{
-                textTransform: 'initial',
-              }}
-            >
-              Login
-            </Button>
+            <Button onClick={handleLoginClick}>Login</Button>
           )}
         </>
       </Container>
@@ -270,7 +253,7 @@ const Sidebar = () => {
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '20px',
-          height: 'calc(100vh - 68px)',
+          height: 'calc(100vh - 69px)',
         }}
       >
         <div>
@@ -280,14 +263,9 @@ const Sidebar = () => {
                 Create a new diagram
               </Typography>
               <Button
-                color="primary"
-                variant="outlined"
-                sx={{
-                  marginBottom: 2,
-                  textTransform: 'initial',
-                }}
+                style={{ marginBottom: '16px' }}
                 onClick={handleCreateDiagram}
-                disabled={createDiagramState === 'loading'}
+                loading={createDiagramState === 'loading'}
               >
                 New diagram
               </Button>
@@ -295,14 +273,9 @@ const Sidebar = () => {
                 Insert a diagram from Mermaid Chart
               </Typography>
               <Button
-                color="primary"
-                variant="outlined"
-                sx={{
-                  marginBottom: 2,
-                  textTransform: 'initial',
-                }}
+                style={{ marginBottom: '16px' }}
                 onClick={handleSelectDiagram}
-                disabled={selectDiagramState === 'loading'}
+                loading={selectDiagramState === 'loading'}
               >
                 Browse diagrams
               </Button>
@@ -310,13 +283,8 @@ const Sidebar = () => {
                 Update all diagrams in document to most recent version
               </Typography>
               <Button
-                color="primary"
-                variant="outlined"
-                sx={{
-                  textTransform: 'initial',
-                }}
                 onClick={handleDiagramsUpdate}
-                disabled={updateDiagramsState === 'loading'}
+                loading={updateDiagramsState === 'loading'}
               >
                 Update all diagrams
               </Button>
@@ -402,7 +370,8 @@ const Sidebar = () => {
               </Typography>
               <Typography paragraph textAlign="center" mt={4} color={'#883a79'}>
                 Don't have an account?{' '}
-                <Button
+                <MuiButton
+                  onClick={() => {}}
                   sx={{
                     textTransform: 'initial',
                     color: 'inherit',
@@ -416,7 +385,7 @@ const Sidebar = () => {
                   }}
                 >
                   Sign up
-                </Button>{' '}
+                </MuiButton>{' '}
               </Typography>
             </>
           )}
