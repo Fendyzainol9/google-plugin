@@ -29,3 +29,9 @@
   color: rgb(150, 150, 150);
   border-color: rgb(207, 207, 211);
 }
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

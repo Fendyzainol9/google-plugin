@@ -60,7 +60,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     getImages();
-  }, [getImages, tab]);
+  }, [getImages]);
 
   useEffect(() => {
     const handleMessage = async (e: MessageEvent) => {
@@ -116,6 +116,13 @@ const Sidebar = () => {
       window.removeEventListener('message', handleMessage);
     };
   }, [getImages]);
+
+  const handleTabSwitch = (tabIndex: number) => {
+    setTab(tabIndex);
+    if (chartImagesState !== 'loading') {
+      getImages();
+    }
+  };
 
   const handleLoginClick = async () => {
     const width = 500;
@@ -292,7 +299,7 @@ const Sidebar = () => {
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                   <Tabs
                     value={tab}
-                    onChange={(_, newValue) => setTab(newValue)}
+                    onChange={(_, newValue) => handleTabSwitch(newValue)}
                     aria-label="basic tabs example"
                   >
                     <Tab
@@ -324,7 +331,7 @@ const Sidebar = () => {
                 />
                 <Container
                   sx={{
-                    display: tab === 1 ? 'flex' : 'none',
+                    display: tab === 1 ? 'grid' : 'none',
                     flexDirection: 'column',
                     alignItems: 'center',
                     gap: '20px',
@@ -333,32 +340,36 @@ const Sidebar = () => {
                     overflowY: 'auto',
                   }}
                 >
-                  {chartImagesState !== 'error' &&
-                    (chartImages.length > 0 ? (
-                      chartImages.map((image) => (
-                        <div
-                          key={image.altDescription}
-                          onClick={() =>
-                            handleSelectedImage(image.altDescription)
-                          }
-                        >
-                          <img
-                            src={image.image}
-                            alt={image.altDescription}
-                            style={{
-                              width: '200px',
-                              height: 'auto',
-                              marginBottom: '10px',
-                              cursor: 'pointer',
-                            }}
-                          />
-                        </div>
-                      ))
-                    ) : (
+                  {chartImagesState === 'loading' &&
+                    chartImages.length === 0 && (
+                      <CircularProgress sx={{ justifySelf: 'center' }} />
+                    )}
+                  {chartImages.length > 0 &&
+                    chartImages.map((image) => (
+                      <div
+                        key={image.altDescription}
+                        onClick={() =>
+                          handleSelectedImage(image.altDescription)
+                        }
+                      >
+                        <img
+                          src={image.image}
+                          alt={image.altDescription}
+                          style={{
+                            width: '200px',
+                            height: 'auto',
+                            marginBottom: '10px',
+                            cursor: 'pointer',
+                          }}
+                        />
+                      </div>
+                    ))}
+                  {chartImagesState === 'success' &&
+                    chartImages.length === 0 && (
                       <Typography title="h4" textAlign="center">
                         No selected diagrams
                       </Typography>
-                    ))}
+                    )}
                 </Container>
               </Box>
             </>

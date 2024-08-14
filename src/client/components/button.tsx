@@ -26,14 +26,8 @@ const Button: FunctionComponent<ButtonProps> = ({
       disabled={disabled}
       {...rest}
     >
-      <Box display="flex" alignItems="center">
-        {loading && (
-          <CircularProgress
-            size={14}
-            color="inherit"
-            sx={{ marginRight: '8px' }}
-          />
-        )}{' '}
+      <Box display="flex" alignItems="center" gap="8px">
+        {loading && <CircularProgress size={14} color="inherit" />}
         {children}
       </Box>
     </button>
