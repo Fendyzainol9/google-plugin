@@ -19,6 +19,7 @@ import {
   syncImages,
   selectChartImage,
   getChartImages,
+  showAlertDialog,
 } from './ui';
 
 // Public functions must be exported as named exports
@@ -43,4 +44,5 @@ export {
   syncImages,
   selectChartImage,
   getChartImages,
+  showAlertDialog,
 };

@@ -3,6 +3,7 @@ import { buildUrl, handleDialogClose } from '../../utils/helpers';
 import { serverFunctions } from '../../utils/serverFunctions';
 import useAuth from '../../hooks/useAuth';
 import { CircularProgress, Container, Typography } from '@mui/material';
+import { showAlertDialog } from '../../utils/alert';
 
 const CreateDiagramDialog = () => {
   const { authState, authStatus } = useAuth();
@@ -37,6 +38,7 @@ const CreateDiagramDialog = () => {
           handleDialogClose();
         } catch (error) {
           console.error('Error inserting image with metadata', error);
+          showAlertDialog('Error inserting image, please try again');
         }
       }
     };
