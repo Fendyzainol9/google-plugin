@@ -492,3 +492,7 @@ export function selectChartImage(altDescription) {
   // Set the selection to the range that includes the second image
   DocumentApp.getActiveDocument().setSelection(range);
 }
+
+export function showAlertDialog(errorText) {
+  DocumentApp.getUi().alert(errorText);
+}

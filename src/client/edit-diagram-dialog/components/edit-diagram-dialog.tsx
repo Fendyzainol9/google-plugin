@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { serverFunctions } from '../../utils/serverFunctions';
 import { buildUrl, handleDialogClose } from '../../utils/helpers';
 import useAuth from '../../hooks/useAuth';
-
-const editUrl = localStorage.getItem('editUrl');
+import { showAlertDialog } from '../../utils/alert';
 
 const EditDiagramDialog = () => {
   const { authState, authStatus } = useAuth();
@@ -14,12 +13,6 @@ const EditDiagramDialog = () => {
 
     const getMetadata = async () => {
       try {
-        if (editUrl) {
-          const iframeUrl = buildUrl(editUrl, authState.token);
-          setDiagramsUrl(iframeUrl);
-          localStorage.removeItem('editUrl');
-          return;
-        }
         const metadata = await serverFunctions.readSelectedImageMetadata();
         if (typeof metadata !== 'string') return;
 
@@ -63,6 +56,7 @@ const EditDiagramDialog = () => {
           handleDialogClose();
         } catch (error) {
           console.error('Error updating image with metadata', error);
+          showAlertDialog('Error updating image, please try again');
         }
       }
     };

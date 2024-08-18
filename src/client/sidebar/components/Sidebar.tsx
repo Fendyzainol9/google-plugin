@@ -14,6 +14,7 @@ import LoadingOverlay from '../../components/loading-overlay';
 import { buildUrl } from '../../utils/helpers';
 import useAuth from '../../hooks/useAuth';
 import Button from '../../components/button';
+import { showAlertDialog } from '../../utils/alert';
 
 interface ChartImage {
   altDescription: string;
@@ -55,6 +56,7 @@ const Sidebar = () => {
     } catch (error) {
       console.error('Error getting images', error);
       setChartImagesState('error');
+      showAlertDialog('Error getting images, please try again');
     }
   }, []);
 
@@ -84,6 +86,7 @@ const Sidebar = () => {
           getImages();
         } catch (error) {
           console.error('Error inserting image with metadata', error);
+          showAlertDialog('Error inserting image, please try again');
         }
         return;
       }
@@ -92,7 +95,7 @@ const Sidebar = () => {
         if (!editUrl) return;
         try {
           localStorage.setItem('editUrl', editUrl);
-          await serverFunctions.openEditDiagramDialogWithUrl();
+          await serverFunctions.openSelectDiagramDialog();
         } catch (error) {
           console.error('Error opening edit dialog', error);
         }
@@ -105,7 +108,7 @@ const Sidebar = () => {
           localStorage.setItem('previewUrl', viewUrl);
           await serverFunctions.openPreviewDiagramDialog();
         } catch (error) {
-          console.error('Error opening edit dialog', error);
+          console.error('Error opening view dialog', error);
         }
       }
     };
@@ -157,6 +160,7 @@ const Sidebar = () => {
     } catch (error) {
       console.error('Error updating all diagrams', error);
       setUpdateDiagramsState('error');
+      showAlertDialog('Error updating diagrams, please try again');
     }
   };
 
@@ -168,6 +172,7 @@ const Sidebar = () => {
     } catch (error) {
       console.error('Error inserting diagram', error);
       setSelectDiagramState('error');
+      showAlertDialog('Error inserting diagram, please try again');
     }
   };
 
@@ -179,6 +184,7 @@ const Sidebar = () => {
     } catch (error) {
       console.error('Error creating new diagram', error);
       setCreateDiagramState('error');
+      showAlertDialog('Error creating new diagram, please try again');
     }
   };
 

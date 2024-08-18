@@ -3,6 +3,9 @@ import { buildUrl, handleDialogClose } from '../../utils/helpers';
 import { serverFunctions } from '../../utils/serverFunctions';
 import useAuth from '../../hooks/useAuth';
 import { CircularProgress, Container, Typography } from '@mui/material';
+import { showAlertDialog } from '../../utils/alert';
+
+const editUrl = localStorage.getItem('editUrl');
 
 const SelectDiagramDialog = () => {
   const { authState, authStatus } = useAuth();
@@ -10,6 +13,13 @@ const SelectDiagramDialog = () => {
 
   useEffect(() => {
     if (!authState?.authorized) return;
+
+    if (editUrl) {
+      const url = buildUrl(editUrl, authState.token);
+      setDiagramsUrl(url);
+      localStorage.removeItem('editUrl');
+      return;
+    }
     const url = buildUrl(
       '/app/plugins/select?pluginSource=googledocs',
       authState.token
@@ -36,6 +46,7 @@ const SelectDiagramDialog = () => {
           );
           handleDialogClose();
         } catch (error) {
+          showAlertDialog('Error inserting image, please try again');
           console.error('Error inserting image with metadata', error);
         }
       }
