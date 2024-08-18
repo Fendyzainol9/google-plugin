@@ -337,7 +337,7 @@ const Sidebar = () => {
                     gap: '20px',
                     marginTop: '20px',
                     height: 'calc(100vh - 520px)',
-                    overflowY: 'auto',
+                    overflowY: 'scroll',
                   }}
                 >
                   {chartImagesState === 'loading' &&
@@ -411,7 +411,7 @@ const Sidebar = () => {
         >
           <Typography paragraph textAlign="center" mb={0}>
             <a
-              href="https://mermaidchart.com"
+              href="https://www.mermaidchart.com"
               target="_blank"
               rel="noreferrer"
               style={{ color: '#883a79' }}

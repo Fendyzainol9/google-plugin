@@ -54,7 +54,7 @@ export function openEditDiagramDialog() {
   const selection = doc.getSelection();
 
   if (!selection) {
-    DocumentApp.getUi().alert('No selection found. Please select an image.');
+    DocumentApp.getUi().alert('No diagram selected. Please select a diagram.');
     return;
   }
 
@@ -71,7 +71,7 @@ export function openEditDiagramDialog() {
     .setWidth(1366)
     .setHeight(768);
 
-  DocumentApp.getUi().showModalDialog(html, 'Edit Diagram');
+  DocumentApp.getUi().showModalDialog(html, 'Edit diagram');
 }
 
 export function openPreviewDiagramDialog() {
@@ -88,7 +88,7 @@ export function openPreviewDiagramDialog() {
     .setWidth(1366)
     .setHeight(768);
 
-  DocumentApp.getUi().showModalDialog(html, 'Preview Diagram');
+  DocumentApp.getUi().showModalDialog(html, 'Preview diagram');
 }
 
 export function openEditDiagramDialogWithUrl() {
@@ -105,7 +105,7 @@ export function openEditDiagramDialogWithUrl() {
     .setWidth(1366)
     .setHeight(768);
 
-  DocumentApp.getUi().showModalDialog(html, 'Edit Diagram');
+  DocumentApp.getUi().showModalDialog(html, 'Edit diagram');
 }
 
 export function openSelectDiagramDialog() {
@@ -121,16 +121,14 @@ export function openSelectDiagramDialog() {
     )
     .setWidth(1366)
     .setHeight(768);
-  DocumentApp.getUi().showModalDialog(html, 'Select Diagram');
+  DocumentApp.getUi().showModalDialog(html, 'Select diagram');
 }
 
 export function openAboutDialog() {
   var ui = DocumentApp.getUi();
 
-  var text =
-    'PlantUML Gizmo was written for use in the OO Analysis and Design courses at École de technologie supérieure, and has been used by Google Engineers on Android and Google Pay.\n\n' +
-    'It uses JavaScript API Client Code described at http://plantuml.sourceforge.net/codejavascript.html as well as inflating routines at http://www.planttext.com/javascript/jquery-plantuml/plantuml.js\n\n' +
-    'Find me on twitter @thefuhrmanator. Version 15 (2019-11-22)';
+  var text = `Mermaid Chart is building the next generation of smart diagramming for enterprise teams. Easily create and collaborate on self-designing diagrams using markdown style text and the Mermaid Visual Editor.
+Skip the rough draft of your diagrams using Mermaid AI and share your professional diagrams easily with colleagues. Say goodbye to boring documentation and hello to Mermaid Chart!`;
 
   ui.alert('About', text, ui.ButtonSet.OK);
 }
@@ -138,9 +136,7 @@ export function openAboutDialog() {
 export function openHelpDialog() {
   var ui = DocumentApp.getUi();
 
-  var text = `
-  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-  `;
+  var text = `Link your Mermaid Chart account to Google Docs and create, insert, or edit your Mermaid Chart diagrams directly in Google Docs to get started. If you have questions about how to use Mermaid Chart, please review the documentation on our website or our YouTube channel. Please contact hello@mermaidchart.com for further customer support`;
 
   ui.alert('Help', text, ui.ButtonSet.OK);
 }
@@ -300,7 +296,7 @@ export function readSelectedImageMetadata() {
   const selection = doc.getSelection();
 
   if (!selection) {
-    DocumentApp.getUi().alert('No selection found. Please select an image.');
+    DocumentApp.getUi().alert('No diagram selected. Please select a diagram.');
     return null;
   }
 
@@ -316,7 +312,7 @@ export function readSelectedImageMetadata() {
   }
 
   if (!image) {
-    DocumentApp.getUi().alert('Please select an image.');
+    DocumentApp.getUi().alert('Please select a diagram.');
     return null;
   }
 
@@ -341,7 +337,7 @@ export function replaceSelectedImageWithBase64AndSize(
   const selection = doc.getSelection();
 
   if (!selection) {
-    DocumentApp.getUi().alert('No selection found. Please select an image.');
+    DocumentApp.getUi().alert('No diagram selected. Please select a diagram.');
     return;
   }
 
@@ -360,7 +356,7 @@ export function replaceSelectedImageWithBase64AndSize(
   }
 
   if (!imageParent || imageChildIndex === null) {
-    DocumentApp.getUi().alert('Please select an image.');
+    DocumentApp.getUi().alert('Please select a diagram.');
     return;
   }
 
