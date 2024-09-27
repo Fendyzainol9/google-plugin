@@ -55,8 +55,8 @@ const EditDiagramDialog = () => {
           );
           handleDialogClose();
         } catch (error) {
-          console.error('Error updating image with metadata', error);
-          showAlertDialog('Error updating image, please try again');
+          console.error('Error updating diagram', error);
+          showAlertDialog('Error updating diagram, please try again');
         }
       }
     };

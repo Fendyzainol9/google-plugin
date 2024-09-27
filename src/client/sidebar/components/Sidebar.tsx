@@ -306,7 +306,7 @@ const Sidebar = () => {
                   <Tabs
                     value={tab}
                     onChange={(_, newValue) => handleTabSwitch(newValue)}
-                    aria-label="basic tabs example"
+                    aria-label="recent diagrams and diagrams in current document"
                   >
                     <Tab
                       label="Recent diagrams"

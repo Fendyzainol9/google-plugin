@@ -46,8 +46,8 @@ const SelectDiagramDialog = () => {
           );
           handleDialogClose();
         } catch (error) {
-          showAlertDialog('Error inserting image, please try again');
-          console.error('Error inserting image with metadata', error);
+          showAlertDialog('Error inserting diagram, please try again');
+          console.error('Error inserting diagram with metadata', error);
         }
       }
     };
